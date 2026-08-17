@@ -5,9 +5,9 @@ worse. The other reads your project's own session transcripts and works out
 what *your* sessions specifically waste words on.
 
 Generic "be concise" prompts cut the same twelve filler words from every
-project. The padding in a Rust engine repo is not the padding in a Django app,
-and a rule written from guesswork deletes words that were carrying meaning.
-This measures instead.
+project. The padding in one codebase is not the padding in another, and a rule
+written from guesswork deletes words that were carrying meaning. This measures
+instead.
 
 ## Install
 
@@ -74,8 +74,7 @@ The output looks fine. That is what makes it dangerous.
 
 ## What a real run found
 
-On a ~100k-line Rust/WGSL engine codebase, across 2,778 assistant turns from
-10 sessions:
+Across 2,778 assistant turns from 10 sessions on one real project:
 
 Median turn was already 114 characters. The sessions were not verbose, so the
 promoted rules targeted habits instead — a turn-initial bridge word appearing
@@ -111,18 +110,6 @@ No percentage is claimed here, because the honest number depends on your
 workload and the rules themselves cost input tokens on every turn they are
 loaded. Calibration reports fewer than three rules? It changes nothing and says
 so. A project whose sessions are already tight does not need this.
-
-## Credit
-
-The idea of a persistent compression skill, and several of the sharper rules —
-notably that invented abbreviations (`cfg`, `impl`, `fn`) save nothing because
-the tokenizer splits them the same as the full word — come from
-[JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) (MIT).
-
-This is an independent rewrite with different goals: no persona, no intensity
-dial, no hosted gateway, no hooks, and per-project calibration from real
-evidence rather than one fixed ruleset. If you want the caveman voice, use
-caveman — it is a good skill and it is funnier than this one.
 
 ## License
 

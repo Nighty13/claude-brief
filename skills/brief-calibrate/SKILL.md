@@ -2,15 +2,16 @@
 name: brief-calibrate
 description: >
   Derive project-specific compression rules from this project's real session
-  transcripts and rewrite the generated block of the `brief` skill. Use when
+  transcripts and write them to `.claude/brief-project.md`. Use when
   the user runs /brief-calibrate, asks to tune or re-tune brief mode, or asks
   what padding this project's sessions actually contain.
 ---
 
 Find the padding *this* project's sessions actually contain, prove it with
-quotes, and rewrite the generated block of `.claude/skills/brief/SKILL.md`.
+quotes, and write `.claude/brief-project.md` in the project root.
 
-Never touch anything outside the BEGIN/END GENERATED markers.
+That file is the only thing this skill writes. Never edit the `brief` skill
+itself — it is shared by every project, and project rules do not belong in it.
 
 ## 1. Protected first
 
@@ -77,8 +78,12 @@ Anything that fails the bar is an observation. Report it, do not encode it.
 
 ## 5. Rewrite, do not append
 
-Re-derive the entire generated block from scratch each run. Do not read the old
-block before deriving — derive, then diff.
+Structure of `.claude/brief-project.md`: a one-line header with the date, the
+session and turn counts it was derived from, then the rules, then the protected
+list. No frontmatter — it is read by the `brief` skill, not registered as one.
+
+Re-derive the whole file from scratch each run. Do not read the old
+`.claude/brief-project.md` before deriving — derive, then diff.
 
 Ceiling: **12 rules, 40 lines.** This text is injected every turn; past that it
 costs more input than it saves in output. At the cap, keep the rules with the
@@ -91,14 +96,14 @@ Counts age — they tell the next run whether the habit survived.
 
 Show the user:
 
-- The proposed block.
-- A diff against the current one.
+- The proposed file.
+- A diff against the current one, if there is one.
 - Every rule dropped since last run, with the reason: no longer observed,
   displaced at the cap, or now protected.
 - Every finding discarded for touching a protected behavior, with its count —
   these are the near-misses, and they are the most useful part of the report.
 
-Wait for approval. Then replace only the text between the markers.
+Wait for approval. Then write `.claude/brief-project.md`, nothing else.
 
 ## Honest scope
 
@@ -107,5 +112,5 @@ the tokens — file reads, tool results, and diffs dominate. Expect a modest
 saving and a real gain in signal density.
 
 If a run produces fewer than three rules, say so and change nothing. A project
-whose sessions are already tight does not need a generated block, and
-manufacturing rules to justify the run is the failure mode of this skill.
+whose sessions are already tight does not need a rules file, and manufacturing
+rules to justify the run is the failure mode of this skill.

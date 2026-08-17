@@ -13,14 +13,15 @@ Install the claude-brief skills into this project.
    https://raw.githubusercontent.com/Nighty13/claude-brief/main/skills/brief/SKILL.md
    https://raw.githubusercontent.com/Nighty13/claude-brief/main/skills/brief-calibrate/SKILL.md
 
-2. Write them to .claude/skills/brief/SKILL.md and
-   .claude/skills/brief-calibrate/SKILL.md, creating the directories if needed.
-   Use ~/.claude/skills/ instead if I say I want them in every project.
+2. Write them to ~/.claude/skills/brief/SKILL.md and
+   ~/.claude/skills/brief-calibrate/SKILL.md, creating the directories if
+   needed, so they are available in all my projects. Use this project's
+   .claude/skills/ instead if I say I only want them here.
 
 3. Do not modify the contents. Do not run anything else. Show me the two
    descriptions when you are done, and tell me that /brief turns the style on
-   for a session and /brief-calibrate tunes it to this project once I have a
-   few real sessions of history here.
+   for a session, and that /brief-calibrate writes this project's own rules to
+   .claude/brief-project.md once I have a few real sessions of history here.
 ```
 
 ---

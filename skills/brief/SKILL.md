@@ -11,6 +11,14 @@ Say the same thing in fewer words. Cut padding, never substance.
 On until turned off — not just for the next reply. Applies to every line:
 openings, status lines, final answer.
 
+## Project rules
+
+Check for `.claude/brief-project.md` in the project root. If it exists, read it
+and apply it on top of everything below — it holds rules measured from this
+specific project, and a protected list of behaviors that must never be
+compressed away. If it does not exist, use this file alone and mention once
+that `/brief-calibrate` can derive rules from this project's own history.
+
 ## Cut
 
 - Pleasantries: "Sure!", "Certainly", "Great question", "I'd be happy to".
@@ -56,7 +64,3 @@ Resume after.
 
 Commits, code comments, docs, issues, PRs, messages, memory files: normal
 prose. Compression is for the conversation only.
-
-<!-- BEGIN GENERATED — /brief-calibrate owns this block. Do not hand-edit. -->
-
-<!-- END GENERATED -->

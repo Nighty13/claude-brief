@@ -14,15 +14,21 @@ instead.
 Easiest: open [PROMPT.md](PROMPT.md) and paste the block to your Claude Code
 agent. It writes the two files for you.
 
-By hand, per project:
+By hand — install once, for every project:
 
 ```bash
 git clone https://github.com/Nighty13/claude-brief .tmp-brief
-cp -r .tmp-brief/skills/* .claude/skills/
+mkdir -p ~/.claude/skills
+cp -r .tmp-brief/skills/* ~/.claude/skills/
 rm -rf .tmp-brief
 ```
 
-For every project, copy into `~/.claude/skills/` instead.
+Use `<project>/.claude/skills/` instead if you only want it in one repo.
+
+Install the skills once, globally. Project-specific rules do **not** go in the
+skill — calibration writes them to `<project>/.claude/brief-project.md`, and
+the skill picks that file up when it runs. One skill, one rules file per
+project, no copies to keep in sync.
 
 No npm package, no CLI, no install script, no hooks. Two markdown files, and
 you should read them before installing.
@@ -51,10 +57,11 @@ different sessions, can be quoted verbatim, and cutting it would not have cost
 the reader information. Everything else is reported as an observation and not
 encoded.
 
-**The file is split.** A fixed core that calibration never touches, and a
-generated block between markers that it rewrites wholesale. Each run
-re-derives from scratch, so rules that no longer earn a citation die instead
-of accumulating. Cap of 12 rules — past that the skill costs more input per
+**The skill and the rules are separate files.** The skill is fixed and shared
+by every project; calibration never edits it. Project rules go in
+`.claude/brief-project.md`, which the skill reads when it is invoked. Each run
+re-derives that file from scratch, so rules that no longer earn a citation die
+instead of accumulating. Cap of 12 rules — past that it costs more input per
 turn than it saves in output.
 
 **A protected list.** Before reading a single transcript, calibration reads
